@@ -1,2 +1,20 @@
-# firechat
-a real time chat, using react for front end and firebase for backend on real time.
+# reactbase-chat
+a real time chat, using reactjs in front-end and firebase for backend on real time.
+
+# Requeriments:
+
+- NodeJs v7
+- npm at leats v4.0
+
+
+# Instructions:
+
+
+- git clone https://github.com/fernandosanchez1128/reactbase-chat.git
+- cd reactbase-chat
+- npm install
+- npm start 
+- Visit localhost:3000 or localhost:3001
+
+
+

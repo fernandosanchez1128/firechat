@@ -6,12 +6,20 @@ import  ReactDOM from 'react-dom'
 
 import  Chat from './Chat'
 
+/**
+ * component with panel to show users in the sistem
+ */
 export default class Panel extends Component {
 
     state = {
         users:[]
     }
 
+    /**
+     * function to show chat history when user is selected
+     * deploy chat component
+     * @param event
+     */
     handleClick = (event) => {
         event.preventDefault()
         var userSession =
@@ -33,10 +41,9 @@ export default class Panel extends Component {
 
     }
 
-    handleDistroy= (event) => {
-        ReactDOM.unmountComponentAtNode(document.getElementById("myChat"))
-    }
-
+    /**
+     * function with listerer for update contacts in the panel
+     */
     componentWillMount () {
         var ref = database.ref('users')
 

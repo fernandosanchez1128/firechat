@@ -3,18 +3,19 @@ import { auth,authGoogle } from '../helpers/auth'
 import  {Image, Button, Col,Glyphicon,ListGroupItem} from 'react-bootstrap/lib/';
 
 
-function setErrorMsg(error) {
-  return {
-    registerError: error.message
-  }
-}
-
+/**
+ * component for logging users
+ */
 export default class Register extends Component {
+
   state = { registerError: null }
+
+    /**
+     * init the login with google
+     * @param e
+     */
   handleSubmit = (e) => {
     e.preventDefault();
-    //auth(this.email.value, this.pw.value)
-      //.catch(e => this.setState(setErrorMsg(e)))
       authGoogle();
 
   }

@@ -11,16 +11,20 @@ import './panel.css'
 import {saveMsg,getIdChat,sendImage,getUrlImage} from '../../helpers/ChatService'
 
 
+/**
+ * component for show and control conversations between user
+ */
 export default class Chat extends Component {
-    /**
-     *
-     * @type {{msgs: Array} arreglo donde se almacena los mensajes del chat}
-     */
+
     state = {
         msgs:[]
     }
 
 
+    /**
+     * function for send messages
+     * @param event
+     */
     handleClickSend= (event) => {
         event.preventDefault()
         var user = this.props.userSession
@@ -42,6 +46,11 @@ export default class Chat extends Component {
 
 
     }
+
+    /**
+     * begin selection of images for sending
+     * @param event
+     */
     handleImage= (event) => {
         event.preventDefault()
         var mediaCapture = document.getElementById('mediaCapture')
@@ -49,7 +58,10 @@ export default class Chat extends Component {
 
     }
 
-
+    /**
+     * function to send images
+     * @param event
+     */
     sendImage= (event) => {
         var file = event.target.files[0]
         var user = this.props.userSession
@@ -65,7 +77,9 @@ export default class Chat extends Component {
     }
 
 
-
+    /**
+     * Funtioon with listener for update conversation between two users
+     */
     componentDidMount () {
 
         var user = this.props.userSession
@@ -73,6 +87,7 @@ export default class Chat extends Component {
         var id = getIdChat(user.id, userFriend.id)
 
         this.ref = database.ref('chats/'.concat(id))
+
 
         this.dbListen = this.ref.limitToLast(50).on("child_added", ((snapshot) => {
 
@@ -97,10 +112,16 @@ export default class Chat extends Component {
 
 
             }));
+            var list_msg = document.getElementById("list_msg");
+            list_msg.scrollTop=list_msg.scrollHeight
+
 
         }))
     }
 
+    /**
+     * kill listener when the conversation is closed
+     */
     componentWillUnmount ()
     {
         this.ref.off();

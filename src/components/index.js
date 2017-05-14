@@ -7,6 +7,14 @@ import Dashboard from './protected/Dashboard'
 import { logout } from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
 
+/**
+ * function for building components. user must be logged
+ * @param Component component to build
+ * @param authed : if user is authenticated
+ * @param rest : others
+ * @returns {XML}
+ * @constructor
+ */
 
 function PrivateRoute ({component: Component, authed, ...rest}) {
   return (
@@ -19,6 +27,14 @@ function PrivateRoute ({component: Component, authed, ...rest}) {
   )
 }
 
+/**
+ * function for building components. user not must be logged
+ * @param Component : component to build
+ * @param authed : if user is authenticated
+ * @param rest : others
+ * @returns {XML}
+ * @constructor
+ */
 function PublicRoute ({component: Component, authed, ...rest}) {
   return (
     <Route
@@ -30,6 +46,7 @@ function PublicRoute ({component: Component, authed, ...rest}) {
   )
 }
 
+
 function InitialRoute ({component: Component, authed, ...rest}) {
     return (
         <Route
@@ -39,12 +56,21 @@ function InitialRoute ({component: Component, authed, ...rest}) {
         />
     )
 }
+
+/**
+ * principal component of application
+ */
 export default class App extends Component {
+
   state = {
     authed: false,
     loading: true,
   }
 
+    /**
+     * event for logout users
+     * @param event
+     */
     logout= (event) => {
         logout().then()
         {
@@ -54,6 +80,11 @@ export default class App extends Component {
 
 
     }
+
+    /**
+     * 57/5000
+     Function with listener to control users login
+      */
   componentDidMount () {
     this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
@@ -69,6 +100,7 @@ export default class App extends Component {
       }
     })
   }
+
   componentWillUnmount () {
     this.removeListener()
   }

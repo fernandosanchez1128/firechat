@@ -5,6 +5,16 @@
 
 import { database, storage,provider } from '../config/constants'
 
+/**
+ * function for sending messages
+ *
+ * @param user user whos send image
+ * @param id_chat  chat's id
+ * @param msg message send
+ * @param type  image or msg (text)
+ * @param imageUrl  URl for images send
+ * @returns {Number}
+ */
 export function saveMsg (user,id_chat,msg, type="msg", imageUrl = "None") {
 
     var today = new Date(),
@@ -22,6 +32,13 @@ export function saveMsg (user,id_chat,msg, type="msg", imageUrl = "None") {
         })
 }
 
+
+/**
+ * return id chat of two users
+ * @param id_user : id of user logged
+ * @param id_contac : id contact chat
+ * @returns {string|Array.<T>}
+ */
 export function getIdChat (id_user, id_contac) {
     var ids = [id_user,id_contac]
     ids.sort();
@@ -29,6 +46,13 @@ export function getIdChat (id_user, id_contac) {
 }
 
 
+/**
+ * function for upload and sending images
+ * @param id_chat : chat's id
+ * @param file : image for sending
+ * @param user : user whos send
+ * @returns {Promise.<TResult>}
+ */
 export function sendImage (id_chat,file,user) {
     if (!file.type.match('image.*')) {
         alert ("The chosen file is not an image")
@@ -47,6 +71,10 @@ export function sendImage (id_chat,file,user) {
         })
     }
 
+/**
+ * return url_image for download
+ * @param imageUri: url of image on the firebase storage
+ */
 export function getUrlImage (imageUri)
 {
 
